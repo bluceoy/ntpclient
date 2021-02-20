@@ -28,7 +28,7 @@ func GetNetworkTime(server string, port int) (*time.Time, error) {
         return nil, err
     }
     defer conn.Close()
-    conn.SetDeadline(time.Now().Add(2 * time.Second))
+    conn.SetDeadline(time.Now().Add(1 * time.Second))
 
     _, err = conn.Write(packet)
     if err != nil {
