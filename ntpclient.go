@@ -19,7 +19,10 @@ func GetNetworkTime(server string, port int) (*time.Time, error) {
     packet := make([]byte, 48)
     packet[0] = 0x1B
 
-    addr, _ := net.ResolveUDPAddr("udp4", fmt.Sprintf("%s:%s", server, strconv.Itoa(port)))
+    addr, err := net.ResolveUDPAddr("udp4", fmt.Sprintf("%s:%s", server, strconv.Itoa(port)))
+    if err != nil {
+        return nil, err
+    }
     conn, err := net.DialUDP("udp4", nil, addr)
     if err != nil {
         return nil, err
